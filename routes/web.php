@@ -55,7 +55,6 @@ Route::group(['namespace' => 'User', 'prefix' => 'user'], function () {
 Route::group(['namespace' => 'Event', 'prefix' => 'event'], function () {
     // Controllers Within The "App\Http\Controllers\Event" Namespace
     // GET
-    Route::get('/register', 'EventController@show_register');
     Route::get('/{id}', 'EventController@show_byid');
     Route::get('/', 'EventController@show_all');
     // POST

@@ -7740,3 +7740,9 @@ footer p {
     display: none;
   }
 }
+
+.event-price {
+    color: grey;
+    margin-top: -0.45em;
+    font-weight: 300;
+}
