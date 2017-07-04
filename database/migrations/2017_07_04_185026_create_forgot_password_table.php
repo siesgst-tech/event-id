@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEventsTable extends Migration
+class CreateForgotPasswordTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,11 @@ class CreateEventsTable extends Migration
      */
     public function up()
     {
-        Schema::create('events', function (Blueprint $table) {
+        Schema::create('forgot_password', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('description');
-            $table->longText('about');
-            $table->longText('rules');
-            $table->longText('gameplay');
-            $table->mediumtext('eventhead');
-            $table->integer('cost');
+            $table->string('email');
+            $table->string('reset_code');
+            $table->enum('status', ['1', '0']);
             $table->timestamps();
         });
     }
@@ -33,6 +29,6 @@ class CreateEventsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('events');
+        Schema::dropIfExists('forgot_password');
     }
 }

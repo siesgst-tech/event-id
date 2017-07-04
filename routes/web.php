@@ -21,12 +21,12 @@ Route::group(['namespace' => 'Auth', 'prefix' => 'auth'], function () {
     Route::get('/register', 'AuthController@show_register');
     Route::get('/login', 'AuthController@show_login');
     Route::get('/forgot', 'AuthController@show_forgot');
-    Route::get('/reset/{key}/{email}', 'AuthController@show_reset');
+    Route::get('/reset/{key}', 'AuthController@show_reset');
     // POST
     Route::post('/register', 'AuthController@do_register');
     Route::post('/login', 'AuthController@do_login');
     Route::post('/forgot', 'AuthController@do_forgot');
-    Route::post('/reset/{key}/{email}', 'AuthController@do_reset');
+    Route::post('/reset/{key}', 'AuthController@do_reset');
 });
 // Admins
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
@@ -52,8 +52,10 @@ Route::group(['namespace' => 'User', 'prefix' => 'user'], function () {
     Route::get('/home', 'UserController@show_home');
     Route::get('/settings', 'UserController@show_settings');
     Route::get('/entries', 'UserController@show_entries');
+    Route::get('/play', 'UserController@show_play');
     // POST
     Route::post('/settings', 'AdminController@do_settings');
+    Route::post('/play', 'UserController@do_play');
 });
 // Events
 Route::group(['namespace' => 'Event', 'prefix' => 'event'], function () {

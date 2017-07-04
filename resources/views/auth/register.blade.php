@@ -10,26 +10,38 @@
                 <p class="lead">Making event management simpler, faster and paperless.</p>
             </div>
             <div class="col col-sm-12 col-md-4 col-lg-offset-1 col-lg-3">
-                <div class="alert alert-dismissible alert-danger">
-                    <button type="button" class="close" data-dismiss="alert">×</button>
-                    Oops, user with that email already exists! <a href="/login" class="alert-link">Try Login</a>
-                </div>
-                <form>
+                @if(Session::has('error'))
+                    <div class="alert alert-dismissible alert-danger">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        {!! Session::get('error') !!}
+                    </div>
+                @endif
+                @if(Session::has('success'))
+                    <div class="alert alert-dismissible alert-success">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        {{ Session::get('success') }}
+                    </div>
+                @endif
+                <form action="" method="POST">
+                    {{ csrf_field() }}
                     <div class="form-group">
                         <label class="control-label" for="name">Full Name</label>
-                        <input class="form-control" id="name" type="text" placeholder="Jon Doe">
+                        <input class="form-control validate" id="name" name="name" type="text" value="{{ old('name') }}" placeholder="Jon Doe">
+                        @if($errors->has('name'))<span class="help-block error">{{ $errors->first('name') }}</span>@endif
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="email">Email</label>
-                        <input class="form-control" id="email" type="text" placeholder="john@doe.com">
+                        <input class="form-control" id="email" name="email" type="email" value="{{ old('email') }}" placeholder="john@doe.com">
+                        @if($errors->has('email'))<span class="help-block error">{{ $errors->first('email') }}</span>@endif
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="password">Password</label>
-                        <input class="form-control" id="password" type="text" placeholder="Password">
+                        <input class="form-control" id="password" name="password" type="password" placeholder="Password">
+                        @if($errors->has('password'))<span class="help-block error">{{ $errors->first('password') }}</span>@endif
                     </div>
                     <br>
                     <div class="form-group">
-                        <button class="btn btn-block btn-primary">Sign up for free</button>
+                        <button type="submit" class="btn btn-block btn-primary">Sign up for free</button>
                     </div>
                 </form>
             </div>

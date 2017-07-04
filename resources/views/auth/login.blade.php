@@ -9,23 +9,34 @@
                 <img src="https://instagram.fbom10-1.fna.fbcdn.net/t51.2885-15/e35/15276762_259538624460922_5449602273514618880_n.jpg" width="100%">
             </div>
             <div class="col col-sm-12 col-md-5 col-lg-4">
-                <div class="alert alert-dismissible alert-danger">
-                    <button type="button" class="close" data-dismiss="alert">×</button>
-                    Oops, user with that email already exists! <a href="/auth/login" class="alert-link">Try Login</a>
-                </div>
-                <h5>Sign in</h5>
-                <form>
+                @if(Session::has('error'))
+                    <div class="alert alert-dismissible alert-danger">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        {!! Session::get('error') !!}
+                    </div>
+                @endif
+                @if(Session::has('success'))
+                    <div class="alert alert-dismissible alert-success">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        {{ Session::get('success') }}
+                    </div>
+                @endif
+                <h5>Login</h5>
+                <form action="" method="POST">
+                    {{ csrf_field() }}
                     <div class="form-group">
                         <label class="control-label" for="email">Email</label>
-                        <input class="form-control" id="email" type="text" placeholder="john@doe.com">
+                        <input class="form-control" id="email" name="email" type="text" value="{{ old('email') }}" placeholder="john@doe.com">
+                        @if($errors->has('email'))<span class="help-block error">{{ $errors->first('email') }}</span>@endif
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="password">Password</label>
-                        <input class="form-control" id="password" type="text" placeholder="Password">
+                        <input class="form-control" id="password" name="password" type="password" placeholder="Password">
+                        @if($errors->has('password'))<span class="help-block error">{{ $errors->first('password') }}</span>@endif
                     </div>
                     <div class="form-group">
                         <a href="/auth/forgot" class="pull-left">Forgot Password</a>
-                        <button class="btn pull-right btn-primary">Login</button>
+                        <button type="submit" class="btn pull-right btn-primary">Login</button>
                     </div>
                 </form>
             </div>

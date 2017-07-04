@@ -21,4 +21,9 @@ class UserController extends Controller
     public function show_entries(Request $request) {
         return view('pages.user.entries');
     }
+
+    // Shows play events
+    public function show_play(Request $request) {
+        return view('pages.user.play');
+    }
 }

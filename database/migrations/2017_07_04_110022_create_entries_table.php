@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAdminsTable extends Migration
+class CreateEntriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class CreateAdminsTable extends Migration
      */
     public function up()
     {
-        Schema::create('admins', function (Blueprint $table) {
+        Schema::create('entries', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id');
+            $table->integer('event_id');
+            $table->integer('cost');
+            $table->enum('status', ['1', '0']); // 1: Active 2: Inactive
             $table->timestamps();
         });
     }
@@ -26,6 +30,6 @@ class CreateAdminsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('admins');
+        Schema::dropIfExists('entries');
     }
 }
