@@ -31,4 +31,9 @@ class AdminController extends Controller
     public function show_entries(Request $request) {
         return view('pages.admin.entries');
     }
+
+    // Shows message
+    public function show_add_message(Request $request) {
+        return view('pages.admin.message');
+    }
 }
