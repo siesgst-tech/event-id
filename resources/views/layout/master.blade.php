@@ -6,6 +6,7 @@
     <meta content="width=device-width,initial-scale=1" name="viewport">
     <title>Event ID - @yield('title')</title>
     <link href="{{ URL::asset('css/bootstrap.css') }}" rel="stylesheet" type="text/css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 </head>
 <body>
     <nav class="navbar navbar-default navbar-fixed-top">
@@ -17,27 +18,38 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#"><button class="btn btn-sm btn-primary">Download Event ID</button></a>
+                        <a href="#"><button class="btn btn-sm btn-primary"><i class="fa fa-android" style="font-size: 1.2em;"></i> Download Event ID</button></a>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     @if (Request::is('auth/*'))
                         <li>
-                            <a href="/auth/register">Register</a>
+                            <a href="/auth/register">REGISTER</a>
                         </li>
                         <li>
-                            <a href="/auth/login">Login</a>
+                            <a href="/auth/login">LOGIN</a>
                         </li>
                     @endif
                     @if (Request::is('user/*'))
                         <li>
-                            <a href="/user/home">Home</a>
+                            <a href="/user/home">HOME</a>
                         </li>
                         <li>
-                            <a href="/user/settings">Settings</a>
+                            <a href="/user/settings">SETTINGS</a>
                         </li>
                         <li>
-                            <a href="/user/entries">Entries</a>
+                            <a href="/user/entries">ENTRIES</a>
+                        </li>
+                    @endif
+                    @if (Request::is('admin/*'))
+                        <li>
+                            <a href="/admin/home">HOME</a>
+                        </li>
+                        <li>
+                            <a href="/admin/event/add">ADD EVENT</a>
+                        </li>
+                        <li>
+                            <a href="/admin/entries">ENTRIES</a>
                         </li>
                     @endif
                 </ul>

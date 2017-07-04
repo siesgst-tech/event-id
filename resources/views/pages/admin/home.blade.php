@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title', 'All Events')
+@section('title', 'Admin Home')
 @section('content')
 
 <div class="container-fluid pull-down">

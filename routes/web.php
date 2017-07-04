@@ -36,10 +36,14 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
     Route::get('/event/update/{id}', 'AdminController@show_update');
     Route::get('/event/{id}', 'AdminController@show_event');
     Route::get('/home', 'AdminController@show_home');
+    Route::get('/event/{id}/message', 'AdminController@show_add_message');
+    Route::get('/entries', 'AdminController@show_entries');
     // POST
     Route::post('/event/add', 'AdminController@do_add');
     Route::post('/event/update/{id}', 'AdminController@do_update');
     Route::post('/event/delete/{id}', 'AdminController@do_delete');
+    Route::post('/event/{id}/message', 'AdminController@do_add_message');
+    Route::post('/event/{id}/message/delete', 'AdminController@do_delete_message');
 });
 // Users
 Route::group(['namespace' => 'User', 'prefix' => 'user'], function () {

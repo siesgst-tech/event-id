@@ -36,8 +36,8 @@
         </div>
     </div>
     <div class="row row-pad">
-        <div class="col col-sm-12 col-md-5 col-lg-4 col-md-offset-1 col-lg-offset-2">
-            <img src="https://instagram.fbom10-1.fna.fbcdn.net/t51.2885-15/e35/15276762_259538624460922_5449602273514618880_n.jpg" width="75%">
+        <div class="col col-sm-12 col-md-5 col-lg-4 col-md-offset-1 col-lg-offset-2 img-land">
+            <img src="https://instagram.fbom10-1.fna.fbcdn.net/t51.2885-15/e35/15276762_259538624460922_5449602273514618880_n.jpg">
         </div>
         <div class="col col-sm-12 col-md-5 col-lg-4 p-pad">
             <h5>Take your online credits</h5>
@@ -59,8 +59,8 @@
                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
         </div>
-        <div class="col col-sm-12 col-md-5 col-lg-4">
-            <img src="https://instagram.fbom10-1.fna.fbcdn.net/t51.2885-15/e35/15253357_1243944665652360_2507941265102864384_n.jpg" width="75%">
+        <div class="col col-sm-12 col-md-5 col-lg-4 img-land">
+            <img src="https://instagram.fbom10-1.fna.fbcdn.net/t51.2885-15/e35/15253357_1243944665652360_2507941265102864384_n.jpg">
         </div>
     </div>
 </div>

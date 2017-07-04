@@ -7722,23 +7722,31 @@ footer p {
   border-radius: 3px;
 }
 
-@media screen and (max-width: 992px) {
-  .row-pad {
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
-  }
-  .row-pad-2x {
-    padding-top: 1em;
-    padding-bottom: 1em;
-  }
+.img-land img {
+    margin: 0 auto;
+    width: 85%;
+}
 
-  .p-pad {
-    padding-top: 2.5em;
-    padding-bottom: 2.5em;
-  }
-  .bottom-users-image {
-    display: none;
-  }
+@media screen and (max-width: 992px) {
+    .img-land img {
+        display: none;
+    }
+    .row-pad {
+        padding-top: 0.5em;
+        padding-bottom: 0.5em;
+    }
+    .row-pad-2x {
+        padding-top: 1em;
+        padding-bottom: 1em;
+    }
+
+    .p-pad {
+        padding-top: 2.5em;
+        padding-bottom: 2.5em;
+    }
+    .bottom-users-image {
+        display: none;
+    }
 }
 
 .event-price {

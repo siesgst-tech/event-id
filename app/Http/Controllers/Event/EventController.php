@@ -11,10 +11,12 @@ class EventController extends Controller
     public function show_all(Request $request) {
         return view('pages.event.list');
     }
+
     // Show event by id
     public function show_byid(Request $request) {
         return view('pages.event.single');
     }
+
     // Show register
     public function show_register(Request $request) {
         return view('pages.event.register');
