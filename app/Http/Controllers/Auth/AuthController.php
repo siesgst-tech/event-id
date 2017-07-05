@@ -76,7 +76,6 @@ class AuthController extends Controller
 
     /*
     * Handles login of user
-    * TODO: add session
     */
     public function do_login(Request $request) {
         // Validate the input
@@ -95,6 +94,8 @@ class AuthController extends Controller
             $checkUser = User::where('email', $request->input('email'))->first();
             if($checkUser) {
                 if (Hash::check($request->input('password'), $checkUser->password)) {
+                    Session::regenerate();
+                    Session::put('session', $checkUser);
                     if($checkUser->role == 'admin') {
                         return redirect('/admin/home');
                     } else if($checkUser->role == 'eventhead') {
@@ -185,5 +186,13 @@ class AuthController extends Controller
                 return redirect('/auth/login')->with('error', 'Incorrect reset code');
             }
         }
+    }
+
+    /*
+    * Handles logout
+    */
+    public function do_logout(Request $request) {
+        Session::flush();
+        return redirect('/auth/login')->with('success', 'See you soon');
     }
 }

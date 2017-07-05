@@ -22,6 +22,7 @@ Route::group(['namespace' => 'Auth', 'prefix' => 'auth'], function () {
     Route::get('/login', 'AuthController@show_login');
     Route::get('/forgot', 'AuthController@show_forgot');
     Route::get('/reset/{key}', 'AuthController@show_reset');
+    Route::get('/logout', 'AuthController@do_logout');
     // POST
     Route::post('/register', 'AuthController@do_register');
     Route::post('/login', 'AuthController@do_login');
@@ -29,7 +30,7 @@ Route::group(['namespace' => 'Auth', 'prefix' => 'auth'], function () {
     Route::post('/reset/{key}', 'AuthController@do_reset');
 });
 // Admins
-Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['session.auth']], function () {
     // Controllers Within The "App\Http\Controllers\Admin" Namespace
     // GET
     Route::get('/event/add', 'AdminController@show_add');
@@ -46,7 +47,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
     Route::post('/event/{id}/message/delete', 'AdminController@do_delete_message');
 });
 // Users
-Route::group(['namespace' => 'User', 'prefix' => 'user'], function () {
+Route::group(['namespace' => 'User', 'prefix' => 'user', 'middleware' => ['session.auth']], function () {
     // Controllers Within The "App\Http\Controllers\User" Namespace
     // GET
     Route::get('/home', 'UserController@show_home');
@@ -54,7 +55,8 @@ Route::group(['namespace' => 'User', 'prefix' => 'user'], function () {
     Route::get('/entries', 'UserController@show_entries');
     Route::get('/play', 'UserController@show_play');
     // POST
-    Route::post('/settings', 'AdminController@do_settings');
+    Route::post('/settings/general', 'UserController@do_general_settings');
+    Route::post('/settings/security', 'UserController@do_security_settings');
     Route::post('/play', 'UserController@do_play');
 });
 // Events
@@ -64,5 +66,5 @@ Route::group(['namespace' => 'Event', 'prefix' => 'event'], function () {
     Route::get('/{id}', 'EventController@show_byid');
     Route::get('/', 'EventController@show_all');
     // POST
-    Route::post('/register', 'EventController@do _register');
+    Route::post('/register', 'EventController@do _register')->middleware('session.auth');
 });

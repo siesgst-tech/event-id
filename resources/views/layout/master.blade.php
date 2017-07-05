@@ -52,6 +52,11 @@
                             <a href="/admin/entries">ENTRIES</a>
                         </li>
                     @endif
+                    @if(Session::has('session'))
+                        <li>
+                            <a href="/auth/logout">LOGOUT</a>
+                        </li>
+                    @endif
                 </ul>
             </div>
         </div>
