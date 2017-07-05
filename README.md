@@ -2,6 +2,9 @@
 
 A simple web application to handle event registrations and payment for the user base.
 
+## Status
+[![Build Status](https://travis-ci.org/siesgst-tech/eventID-web.svg?branch=master)](https://travis-ci.org/siesgst-tech/eventID-web)
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
