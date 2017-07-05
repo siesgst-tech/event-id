@@ -12,19 +12,20 @@ These instructions will get you a copy of the project up and running on your loc
 2. Apache Server
 3. MySQL Backend
 
-```
-Give examples
-```
-
 ### Installing
 
-TODO: Steps to install and use this web application
-
-Say what the step will be
-
+Copy .env.example and save it as .env
+Create MySQL database with required name and update .env file with appropriate details
 ```
-Give the example
+DB_DATABASE=<your database name>
+DB_USERNAME=<your mysql username>
+DB_PASSWORD=<your mysql password>
 ```
+Create tables in database as mentioned in database/migrations
+```
+php artisan migrate
+```
+
 
 ## Deployment
 
@@ -37,11 +38,7 @@ TODO: Additional notes about how to deploy this on a live system
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](<gist link>) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
+Please read [CONTRIBUTING.md](https://github.com/siesgst-tech/eventID-web/blob/master/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Authors
 
