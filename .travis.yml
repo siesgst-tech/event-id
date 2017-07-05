@@ -1,0 +1,23 @@
+language: php
+
+php:
+  - '7.0'
+
+sudo: false
+
+before_script:
+  - cp .env.travis .env
+  - composer install --dev --prefer-source --no-interaction
+  - php artisan key:generate
+  - mysql -e 'CREATE DATABASE travis_db;'
+  - php artisan migrate --seed
+
+script:
+  - vendor/bin/phpunit --testdox --coverage-text tests
+
+notifications:
+  email:
+    recipients:
+      - omkar.ninja@gmail.com
+    on_success: always
+    on_failure: always
