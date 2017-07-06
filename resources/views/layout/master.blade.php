@@ -30,29 +30,32 @@
                             <a href="/auth/login">LOGIN</a>
                         </li>
                     @endif
-                    @if (Request::is('user/*'))
-                        <li>
-                            <a href="/user/home">HOME</a>
-                        </li>
-                        <li>
-                            <a href="/user/settings">SETTINGS</a>
-                        </li>
-                        <li>
-                            <a href="/user/entries">ENTRIES</a>
-                        </li>
-                    @endif
-                    @if (Request::is('admin/*'))
-                        <li>
-                            <a href="/admin/home">HOME</a>
-                        </li>
-                        <li>
-                            <a href="/admin/event/add">ADD EVENT</a>
-                        </li>
-                        <li>
-                            <a href="/admin/entries">ENTRIES</a>
-                        </li>
-                    @endif
                     @if(Session::has('session'))
+                        @if(Session::get('session')->role == 'admin')
+                            <li>
+                                <a href="/admin/home">HOME</a>
+                            </li>
+                            <li>
+                                <a href="/admin/event/add">ADD EVENT</a>
+                            </li>
+                            <li>
+                                <a href="/admin/entries">ENTRIES</a>
+                            </li>
+                            <li>
+                                <a href="/user/settings">SETTINGS</a>
+                            </li>
+                        @endif
+                        @if(Session::get('session')->role == 'user')
+                            <li>
+                                <a href="/user/home">HOME</a>
+                            </li>
+                            <li>
+                                <a href="/user/settings">SETTINGS</a>
+                            </li>
+                            <li>
+                                <a href="/user/entries">ENTRIES</a>
+                            </li>
+                        @endif
                         <li>
                             <a href="/auth/logout">LOGOUT</a>
                         </li>
