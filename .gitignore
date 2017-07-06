@@ -12,3 +12,5 @@ npm-debug.log
 .DS_Store
 */.DS_Store
 .idea
+config/jwt.php
+
