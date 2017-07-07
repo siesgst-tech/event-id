@@ -20,7 +20,13 @@ class UserController extends Controller
         $session = Session::get('session');
         // Get all events
         $events = Event::paginate(5);
-        return view('pages.user.home')->with('session', $session)->with('events', $events);
+        $messages = DB::table('entries')
+                    ->join('messages', 'entries.event_id', 'messages.event_id')
+                    ->join('users', 'entries.id', 'users.id')
+                    ->join('events', 'entries.event_id', 'events.id')
+                    ->select('messages.*', 'events.name')
+                    ->paginate(5);
+        return view('pages.user.home')->with('session', $session)->with('events', $events)->with('messages', $messages);
     }
 
     // Shows user's settings
@@ -44,7 +50,13 @@ class UserController extends Controller
 
     // Shows all messages
     public function show_messages(Request $request) {
-
+        $messages = DB::table('entries')
+                    ->join('messages', 'entries.event_id', 'messages.event_id')
+                    ->join('users', 'entries.id', 'users.id')
+                    ->join('events', 'entries.event_id', 'events.id')
+                    ->select('messages.*', 'events.name')
+                    ->paginate(15);
+        return view('pages.user.messages')->with('messages', $messages);
     }
 
     /*

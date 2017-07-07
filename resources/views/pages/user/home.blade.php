@@ -25,26 +25,15 @@
         <div class="col col-xs-12 col-lg-6 col-md-6">
             <h4 align="center">Messges</h4>
             <div class="list-group">
-                <a href="#" class="list-group-item">
-                    <h5 class="list-group-item-heading">Message Title</h5>
-                    <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat.</p>
-                    <span class="pull-left"><b>Event:</b> Laser Tag</span>
-                    <span class="pull-right"><b>Time:</b> 28 Jan 2016 12:30 PM</span>
-                    <br>
-                </a>
-                <a href="#" class="list-group-item">
-                    <h5 class="list-group-item-heading">Message Title</h5>
-                    <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat.</p>
-                    <span class="pull-left"><b>Event:</b> Laser Tag</span>
-                    <span class="pull-right"><b>Time:</b> 28 Jan 2016 12:30 PM</span>
-                    <br>
-                </a>
+                @foreach($messages as $message)
+                    <span href="#" class="list-group-item">
+                        <h5 class="list-group-item-heading">{{ $message->title }}</h5>
+                        <p class="list-group-item-text">{{ $message->message }}</p>
+                        <span class="pull-left"><b>Event:</b> {{ $message->name }}</span>
+                        <span class="pull-right"><b>Time:</b> {{ \Carbon\Carbon::createFromTimeStamp(strtotime($message->updated_at))->diffForHumans() }}</span>
+                        <br>
+                    </span>
+                @endforeach
                 <br>
                 <a href="/user/messages" class="pull-right btn btn-primary">VIEW ALL</a>
             </div>
