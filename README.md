@@ -29,7 +29,6 @@ Create tables in database as mentioned in database/migrations
 php artisan migrate
 ```
 
-
 ## Deployment
 
 TODO: Additional notes about how to deploy this on a live system
@@ -38,6 +37,7 @@ TODO: Additional notes about how to deploy this on a live system
 
 * [Laravel](https://laravel.com) - The web framework used
 * [Composer](https://getcomposer.org) - Dependency Management
+* [JWT](https://jwt.io) - Authentication for APIs
 
 ## Contributing
 
@@ -55,4 +55,4 @@ TODO: Add a license
 
 ## Acknowledgments
 
-TODO: Add acknowledgments
+* **Adding JWT for APIs** - [VinayA8](https://github.com/VinayA8)
