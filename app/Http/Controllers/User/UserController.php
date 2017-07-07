@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Session;
 use App\User;
+use App\Event;
+use App\Entry;
+use App\Message;
+use DB;
 use Validator;
 use Illuminate\Support\Facades\Hash;
 
@@ -14,7 +18,9 @@ class UserController extends Controller
     // Shows home
     public function show_home(Request $request) {
         $session = Session::get('session');
-        return view('pages.user.home')->with('session', $session);
+        // Get all events
+        $events = Event::paginate(5);
+        return view('pages.user.home')->with('session', $session)->with('events', $events);
     }
 
     // Shows user's settings
@@ -24,12 +30,21 @@ class UserController extends Controller
 
     // Shows user's entries
     public function show_entries(Request $request) {
-        return view('pages.user.entries');
+        $entries = DB::table('entries')
+                   ->join('events', 'entries.event_id', 'events.id')
+                   ->select('entries.*', 'events.name')
+                   ->where('user_id', Session::get('session')->id)->paginate(5);
+        return view('pages.user.entries')->with('entries', $entries);
     }
 
     // Shows play events
     public function show_play(Request $request) {
         return view('pages.user.play');
+    }
+
+    // Shows all messages
+    public function show_messages(Request $request) {
+
     }
 
     /*

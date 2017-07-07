@@ -37,14 +37,11 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['ses
     Route::get('/event/update/{id}', 'AdminController@show_update');
     Route::get('/event/{id}', 'AdminController@show_event');
     Route::get('/home', 'AdminController@show_home');
-    Route::get('/event/{id}/message', 'AdminController@show_add_message');
     Route::get('/entries', 'AdminController@show_entries');
     // POST
     Route::post('/event/add', 'AdminController@do_add');
     Route::post('/event/update/{id}', 'AdminController@do_update');
     Route::post('/event/delete/{id}', 'AdminController@do_delete');
-    Route::post('/event/{id}/message', 'AdminController@do_add_message');
-    Route::post('/event/{id}/message/delete', 'AdminController@do_delete_message');
 });
 // Users
 Route::group(['namespace' => 'User', 'prefix' => 'user', 'middleware' => ['session.auth']], function () {
@@ -54,6 +51,7 @@ Route::group(['namespace' => 'User', 'prefix' => 'user', 'middleware' => ['sessi
     Route::get('/settings', 'UserController@show_settings');
     Route::get('/entries', 'UserController@show_entries');
     Route::get('/play', 'UserController@show_play');
+    Route::get('/messages', 'UserController@show_messages');
     // POST
     Route::post('/settings/general', 'UserController@do_general_settings');
     Route::post('/settings/security', 'UserController@do_security_settings');
@@ -63,8 +61,11 @@ Route::group(['namespace' => 'User', 'prefix' => 'user', 'middleware' => ['sessi
 Route::group(['namespace' => 'Event', 'prefix' => 'event'], function () {
     // Controllers Within The "App\Http\Controllers\Event" Namespace
     // GET
+    Route::get('/all', 'EventController@show_all');
+    Route::get('/{id}/message', 'EventController@show_add_message');
     Route::get('/{id}', 'EventController@show_byid');
-    Route::get('/', 'EventController@show_all');
     // POST
-    Route::post('/register', 'EventController@do _register')->middleware('session.auth');
+    Route::post('/{id}/register', 'EventController@do_register')->middleware('session.auth');
+    Route::post('/{id}/message', 'EventController@do_add_message');
+    Route::post('/{id}/message/delete', 'EventController@do_delete_message');
 });

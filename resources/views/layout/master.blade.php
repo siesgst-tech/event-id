@@ -45,7 +45,7 @@
                                 <a href="/user/settings">SETTINGS</a>
                             </li>
                         @endif
-                        @if(Session::get('session')->role == 'user')
+                        @if(Session::get('session')->role == 'user' || Session::get('session')->role == 'eventhead')
                             <li>
                                 <a href="/user/home">HOME</a>
                             </li>
@@ -56,6 +56,9 @@
                                 <a href="/user/entries">ENTRIES</a>
                             </li>
                         @endif
+                        <li>
+                            <a href="/event/all">EVENTS</a>
+                        </li>
                         <li>
                             <a href="/auth/logout">LOGOUT</a>
                         </li>

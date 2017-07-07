@@ -8,6 +8,7 @@ use Session;
 use App\Event;
 use App\Entries;
 use Validator;
+use DB;
 
 class AdminController extends Controller
 {
@@ -47,9 +48,13 @@ class AdminController extends Controller
 
     // Shows event by id page
     public function show_event(Request $request, $id) {
-        if(Session::get('session')->role == 'admin') {
+        if(Session::get('session')->role == 'admin' || Session::get('session')->role == 'eventhead') {
             $event = Event::find($id);
-            return view('pages.admin.event')->with('event', $event);
+            $entries = DB::table('entries')
+                       ->join('users', 'entries.user_id', 'users.id')
+                       ->select('entries.*', 'users.name', 'users.branch', 'users.year')
+                       ->where('event_id', $id)->paginate(15);
+            return view('pages.admin.event')->with('event', $event)->with('entries', $entries);
         } else {
             return redirect('/user/home');
         }
@@ -58,16 +63,12 @@ class AdminController extends Controller
     // Shows entries
     public function show_entries(Request $request) {
         if(Session::get('session')->role == 'admin') {
-            return view('pages.admin.entries');
-        } else {
-            return redirect('/user/home');
-        }
-    }
-
-    // Shows message
-    public function show_add_message(Request $request) {
-        if(Session::get('session')->role == 'admin') {
-            return view('pages.admin.message');
+            // Get all entries
+            $entries = DB::table('entries')
+                       ->join('events', 'entries.event_id', 'events.id')
+                       ->join('users', 'entries.user_id', 'users.id')
+                       ->paginate(5);
+            return view('pages.admin.entries')->with('entries', $entries);
         } else {
             return redirect('/user/home');
         }
