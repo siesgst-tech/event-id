@@ -32,6 +32,15 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
+        if(strpos($request->getUri(), '/api') != false){
+            if(empty($exception->getMessage()))$message = 'Some error. Try again';
+            else $message = $exception->getMessage();
+            return Response::json(
+                $data = array('status' => 'fail', 'message' => $message),
+                $status = 401,
+                $headers = ['Content-Type' => 'application/json'],
+                $options = JSON_PRETTY_PRINT);
+        }
         parent::report($exception);
     }
 

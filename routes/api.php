@@ -16,3 +16,19 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group(['namespace' => 'Api'], function () {
+    // REFRESH, TOKEN AUTH
+	Route::post('/auth', ['uses' => 'ApiController@auth'])->middleware('jwt.refresh');
+	// AUTH
+	Route::post('/login', ['uses' => 'ApiController@login']);
+	// With Middleware for logged in
+	Route::group(['middleware' => ['jwt.verify']], function () {
+		// SETTINGS
+		Route::post('/settings/profile', ['uses' => 'ApiController@update_profile']);
+		Route::post('/settings/password', ['uses' => 'ApiController@update_password']);
+		// USER EVENTS
+        Route::post('/user/entries', ['uses' => 'ApiController@my_entries']);
+        Route::post('/user/messages', ['uses' => 'ApiController@my_messages']);
+	});
+});
