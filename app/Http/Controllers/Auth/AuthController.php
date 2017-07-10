@@ -53,12 +53,18 @@ class AuthController extends Controller
         ], $messages);
         // If validator fails
         if($validator->fails()){
-            return redirect()->back()->with('error', 'Some errors in your form')->withErrors($validator)->withInput();
+            return response()->json([
+                    'status' => 'fail',
+                    'message' => 'There are some errors in your Form !',
+                ]);
         } else {
             // Check if user exists
             $checkUser = User::where('email', $request->input('email'))->get();
             if(count($checkUser) == 1) {
-                return redirect()->back()->with('error', 'User with that email already exists. <a href="/auth/login" class="alert-link">Try Login</a>')->withInput();
+                return response()->json([
+                    'status' => 'fail',
+                    'message' => 'User with that email id already exists!',
+                ]);
             } else {
                 // Register that user
                 $password = Hash::make($request->input('password'));
@@ -66,9 +72,15 @@ class AuthController extends Controller
                     ['email' => $request->input('email'), 'name' => $request->input('name'), 'password' => $password]
                 );
                 if($newUser) {
-                    return redirect()->back()->with('success', 'Registration successful. Confirmation email has been sent.');
+                    return response()->json([
+                    'status' => 'success',
+                    'message' => 'Registration Successful ! Confirmation link has been sent to Email !',
+                ]);
                 } else {
-                    return redirect()->back()->with('error', 'Some error. Try again')->withInput();
+                    return response()->json([
+                    'status' => 'fail',
+                    'message' => 'Something went wrong !',
+                ]);
                 }
             }
         }
@@ -88,7 +100,10 @@ class AuthController extends Controller
         ], $messages);
         // If validator fails
         if($validator->fails()){
-            return redirect()->back()->with('error', 'Some errors in your form')->withErrors($validator)->withInput();
+            return response()->json([
+                'status' => 'fail',
+                'message' => 'There are some errors in your form !',
+            ]);
         } else {
             // Check if user exists
             $checkUser = User::where('email', $request->input('email'))->first();
@@ -97,17 +112,32 @@ class AuthController extends Controller
                     Session::regenerate();
                     Session::put('session', $checkUser);
                     if($checkUser->role == 'admin') {
-                        return redirect('/admin/home');
+                        return response()->json([
+                        'status' => 'success',
+                        'message' => 'admin',
+                    ]);
                     } else if($checkUser->role == 'eventhead') {
-                        return redirect('/user/home');
+                        return response()->json([
+                        'status' => 'success',
+                        'message' => 'eventhead',
+                    ]);
                     } else if($checkUser->role == 'user') {
-                        return redirect('/user/home');
+                        return response()->json([
+                        'status' => 'success',
+                        'message' => 'user',
+                    ]);
                     }
                 } else {
-                    return redirect()->back()->with('error', 'Incorrect password')->withInput();
+                    return response()->json([
+                        'status' => 'fail',
+                        'message' => 'Incorrect Password !',
+                    ]);
                 }
             } else {
-                return redirect()->back()->with('error', 'There is no such user')->withInput();
+                return response()->json([
+                    'status' => 'fail',
+                    'message' => 'There is no such User !',
+                ]);
             }
         }
     }

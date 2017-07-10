@@ -7,6 +7,7 @@
     <title>Event ID - @yield('title')</title>
     <link href="{{ URL::asset('css/bootstrap.css') }}" rel="stylesheet" type="text/css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>
     <nav class="navbar navbar-default navbar-fixed-top">
@@ -93,5 +94,7 @@
     </footer>
     <script src="{{ URL::asset('js/jquery.min.js') }}" type="text/javascript"></script>
     <script src="{{ URL::asset('js/bootstrap.js') }}" type="text/javascript"></script>
+    <script src="{{ URL::asset('ajaxactions/auth.js') }}" type="text/javascript"></script>
+    <script src="{{ URL::asset('ajaxactions/register.js') }}" type="text/javascript"></script>
 </body>
 </html>
