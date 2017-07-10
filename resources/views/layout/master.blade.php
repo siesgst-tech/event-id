@@ -95,6 +95,5 @@
     <script src="{{ URL::asset('js/jquery.min.js') }}" type="text/javascript"></script>
     <script src="{{ URL::asset('js/bootstrap.js') }}" type="text/javascript"></script>
     <script src="{{ URL::asset('ajaxactions/auth.js') }}" type="text/javascript"></script>
-    <script src="{{ URL::asset('ajaxactions/register.js') }}" type="text/javascript"></script>
 </body>
 </html>
