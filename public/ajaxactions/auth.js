@@ -1,7 +1,8 @@
-// Login
 $(document).ready(function(){
     $('#login-button').removeAttr('disabled');
-         
+    $('#register-button').removeAttr('disabled');
+
+    //Login     
     $("#LoginForm").submit(function (e) {
         $('#login-button').html('<i class="fa fa-circle-o-notch fa-spin"></i> Logging in...');
         $.ajaxSetup({
@@ -46,14 +47,9 @@ $(document).ready(function(){
             }
         });
     });
-});
-
 
 //Register
-$(document).ready(function(){
-    $('#register-button').removeAttr('disabled');
-         
-    $("#RegisterForm").submit(function (e) {
+   $("#RegisterForm").submit(function (e) {
         $('#register-button').html('<i class="fa fa-circle-o-notch fa-spin"></i> Signing Up...');
         $.ajaxSetup({
             headers: {
