@@ -24,6 +24,15 @@ DB_DATABASE=<your database name>
 DB_USERNAME=<your mysql username>
 DB_PASSWORD=<your mysql password>
 ```
+Download the dependencies
+```
+composer update
+```
+Generate configuration keys
+```
+php artisan key:generate
+php artisan jwt:generate
+```
 Create tables in database as mentioned in database/migrations
 ```
 php artisan migrate
