@@ -116,12 +116,7 @@ class AuthController extends Controller
                         'status' => 'success',
                         'message' => 'admin',
                     ]);
-                    } else if($checkUser->role == 'eventhead') {
-                        return response()->json([
-                        'status' => 'success',
-                        'message' => 'eventhead',
-                    ]);
-                    } else if($checkUser->role == 'user') {
+                    } else {
                         return response()->json([
                         'status' => 'success',
                         'message' => 'user',
