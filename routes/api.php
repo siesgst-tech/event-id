@@ -30,5 +30,7 @@ Route::group(['namespace' => 'Api'], function () {
 		// USER EVENTS
         Route::post('/user/entries', ['uses' => 'ApiController@my_entries']);
         Route::post('/user/messages', ['uses' => 'ApiController@my_messages']);
+        // EVENT HEADS
+        Route::post('/events/entries', ['uses' => 'ApiController@event_entries']);
 	});
 });

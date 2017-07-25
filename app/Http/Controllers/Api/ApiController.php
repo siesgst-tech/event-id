@@ -153,6 +153,27 @@ class ApiController extends Controller
     }
 
     /*
+    * Handles showing all event entries
+    */
+    public function event_entries(Request $request) {
+        // Validate the input
+        $validator = Validator::make($request->all(), [
+            'event_id' => 'required',
+        ]);
+        // If validator fails
+        if($validator->fails()){
+            return $this->send_response('fail', 'Some errors in your form');
+        } else {
+            $entries = DB::table('entries')
+                        ->join('users', 'entries.id', 'users.id')
+                        ->join('events', 'entries.event_id', 'events.id')
+                        ->select('users.name', 'entries.*')
+                        ->get();
+            return $this->send_response('success', $entries);
+        }
+    }
+
+    /*
     * Handles showing all event messages
     */
     public function my_messages(Request $request) {
