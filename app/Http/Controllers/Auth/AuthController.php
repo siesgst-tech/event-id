@@ -151,7 +151,10 @@ class AuthController extends Controller
         ], $messages);
         // If validator fails
         if($validator->fails()){
-            return redirect()->back()->with('error', 'Some errors in your form')->withErrors($validator)->withInput();
+            return response()->json([
+                        'status' => 'fail',
+                        'message' => 'Some Errors in your Form !',
+                    ]);
         } else {
             // Check if user exists
             $checkUser = User::where('email', $request->input('email'))->get();
@@ -159,7 +162,10 @@ class AuthController extends Controller
                 // Find if there is a reset_code already unused
                 $checkForgotUser = DB::table('forgot_password')->where('email', $request->input('email'))->where('status', 1)->first();
                 if($checkForgotUser) {
-                    return redirect()->back()->with('success', 'Password reset email has been sent successfully');
+                    return response()->json([
+                        'status' => 'success',
+                        'message' => 'Password reset Email has been sent successfully !',
+                    ]);
                 } else {
                     // Generate a reset_code
                     $reset_code = "EID-".strtoupper(substr(md5(base64_encode(openssl_random_pseudo_bytes(32))), 0, 4));
@@ -168,13 +174,22 @@ class AuthController extends Controller
                         ['email' => $request->input('email'), 'reset_code' => $reset_code, 'status' => 1]
                     );
                     if($newForgotUser) {
-                        return redirect()->back()->with('success', 'Password reset email has been sent successfully');
+                        return response()->json([
+                        'status' => 'success',
+                        'message' => 'Password reset Email has been sent successfully !',
+                    ]);
                     } else {
-                        return redirect()->back()->with('error', 'Some error. Try again');
+                        return response()->json([
+                        'status' => 'fail',
+                        'message' => 'Some Error Try Again !',
+                    ]);
                     }
                 }
             } else {
-                return redirect()->back()->with('error', 'There is no such user')->withInput();
+                return response()->json([
+                        'status' => 'fail',
+                        'message' => 'There is No Such User !',
+                    ]);
             }
         }
     }

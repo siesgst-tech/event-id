@@ -1,7 +1,7 @@
 $(document).ready(function(){
     $('#login-button').removeAttr('disabled');
     $('#register-button').removeAttr('disabled');
-
+    $('#forgot-button').removeAttr('disabled');
     //Login     
     $("#LoginForm").submit(function (e) {
         $('#login-button').html('<i class="fa fa-circle-o-notch fa-spin"></i> Logging in...');
@@ -91,6 +91,54 @@ $(document).ready(function(){
             },
             error: function (data) {
                 $('#login-button').html('LOGIN');
+                $("#error").text("Something went Wrong !");
+                $("#success").hide();
+                $("error").show();
+            }
+        });
+    });
+
+//Forgot
+$("#ForgotForm").submit(function (e) {
+        $('#forgot-button').html('<i class="fa fa-circle-o-notch fa-spin"></i> Sending Email...');
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        })
+        e.preventDefault(); 
+        var FORM_DATA = {
+            email: $('#email').val(),
+        }
+        var POST_URL = "/auth/forgot";
+        $.ajax({
+            type: "POST",
+            url: POST_URL,
+            data: FORM_DATA,
+            dataType: 'json',
+            success: function (response) {
+                data = jQuery.parseJSON(JSON.stringify(response));
+                if(data.status == 'fail') {
+                    $('#forgot-button').html('SUBMIT');
+                    $("#error").text(data.message);
+                    $("#success").hide();
+                    $("#error").show();
+                }
+                else if(data.status == 'success') {
+                    $('#forgot-button').html('SUBMIT');
+                    $("#success").text(data.message);
+                    $("#error").hide();
+                    $("#success").show();
+                }
+                else {
+                    $('#forgot-button').html('SUBMIT');
+                    $("#error").text("Something went Wrong !");
+                    $("#success").hide();
+                    $("#error").show();
+                }
+            },
+            error: function (data) {
+                $('#forgot-button').html('SUBMIT');
                 $("#error").text("Something went Wrong !");
                 $("#success").hide();
                 $("error").show();
